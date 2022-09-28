@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 		post "update_account" => "accounts#update_user_details"
 	end
 
+	get "logout" => "accounts#logout"
+
 	root "accounts#register_page"
 end
