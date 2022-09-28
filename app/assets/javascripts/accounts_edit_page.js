@@ -4,6 +4,12 @@ $(document).ready(function () {
 });
 
 
+/**
+* DOCU: This function will trigger the submission of update_user_details_form<br>
+* Triggered: .on("click", "#update_user_details_button", submitUpdateUserDetailsForm)<br>
+* Last Updated Date: September 28, 2022
+* @author Adrian
+*/
 function submitUpdateUserDetailsForm(e){
     e.preventDefault()
 
