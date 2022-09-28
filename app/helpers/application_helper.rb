@@ -28,4 +28,14 @@ module ApplicationHelper
         return response_data
     end
 
+    # DOCU: Function to encrypt password
+    # Triggered: by UserModel
+    # Requires: password
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
+    def encrypt_password(password)
+        # TODO: put in ENV file for prefix and suffix
+        Digest::MD5.hexdigest("password!secured#{password}password_super_secured123")
+    end
+
 end
