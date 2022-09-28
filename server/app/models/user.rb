@@ -79,7 +79,7 @@ class User < ApplicationRecord
         return response_data
     end
 
-     # DOCU: Method to login user
+    # DOCU: Method to login user
     # Triggered by: AccountsController
 	# Requires: params - email, password
     # Returns: { status: true/false, result, error }
@@ -111,6 +111,7 @@ class User < ApplicationRecord
 
         return response_data
     end
+
     # DOCU: Method to route the update user details
     # Triggered by: AccountsController
 	# Requires: params - first_name, last_name, email, password, confirm_password
