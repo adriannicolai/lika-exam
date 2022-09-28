@@ -4,10 +4,10 @@ include UsersHelper
 
 class User < ApplicationRecord
     # DOCU: Method to insert new account
-    # Triggered by UsersController#create_user
+    # Triggered by: AccountsController
 	# Requires: params - first_name, last_name, email, password, confirm_password
     # Returns: { status: true/false, result: { user_details }, error }
-    # Last updated at: July 16, 2022
+    # Last updated at: September 28, 2022
     # Owner: Adrian
     def self.create_user(params)
         response_data = { :status => false, :result => {}, :error => nil }
@@ -28,7 +28,7 @@ class User < ApplicationRecord
                     create_new_user = insert_record(["
                         INSERT INTO users (first_name, last_name, email, password, is_admin, created_at, updated_at)
                         VALUES (?, ?, ?, ?, ?, NOW(), NOW())
-                    ", first_name, last_name, email, encrypt_password(password)], USER_LEVEL_ID[:admin])
+                    ", first_name, last_name, email, encrypt_password(password), USER_LEVEL_ID[:admin]])
 
                     if create_new_user.present?
                         response_data[:status] = true
@@ -50,6 +50,12 @@ class User < ApplicationRecord
         return response_data
     end
 
+    # DOCU: Method to update user
+    # Triggered by: AccountsController
+	# Requires: params - first_name, last_name, email, password, confirm_password
+    # Returns: { status: true/false, result: { user_details }, error }
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
     def self.update_user(params)
         response_data = { :status => false, :result => {}, :error => nil }
 
@@ -68,6 +74,12 @@ class User < ApplicationRecord
         return response_data
     end
 
+     # DOCU: Method to update user record dynamically
+    # Triggered by: AccountsController
+	# Requires: params - first_name, last_name, email, password, confirm_password
+    # Returns: { status: true/false, result: { user_details }, error }
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
     def self.update_user_details(params)
         response_data = { :status => false, :result => {}, :error => nil }
 
