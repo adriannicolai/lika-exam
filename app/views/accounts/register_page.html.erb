@@ -1,0 +1,15 @@
+<h1>Register page</h1>
+<form action="accounts/register" method="POST" id="register_user_form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <p>First Name</p>
+    <input type="text" name="first_name" />
+    <p>Last Name</p>
+    <input type="text" name="last_name" />
+    <p>Email</p>
+    <input type="text" name="email" />
+    <p>Password</p>
+    <input type="password" name="password" />
+    <p>Confirm Password</p>
+    <input type="password" name="confirm_password" />
+    <input type="submit" value="Submit" id="register_user_button" />
+</form>
