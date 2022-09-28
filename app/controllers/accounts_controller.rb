@@ -1,7 +1,7 @@
 include UsersHelper
 class AccountsController < ApplicationController
 	before_action :check_user_session, except: [:register_page, :register, :login_page, :login]
-
+	before_action :check_user_is_logged_in, only: [:register_page, :login_page]
 
 	# DOCU: This is the home page
     # Triggered by: (GET) /accounts/home_page
@@ -115,12 +115,20 @@ class AccountsController < ApplicationController
 	end
 
 	private
-		# DOCU: Redirects the user to the home page if there is no session
+		# DOCU: Redirects the user to the sign up if there is no session
 		# Triggered by before_action
 		# Session: session - user_id
 		# Last udpated at: September 28, 2022
 		# Owner:  Adrian
 		def check_user_session
 			redirect_to "/" if !session[:user_id].present?
+		end
+		# DOCU: Redirects the user to the home page if there is a session
+		# Triggered by before_action
+		# Session: session - user_id
+		# Last udpated at: September 28, 2022
+		# Owner:  Adrian
+		def check_user_is_logged_in
+			redirect_to "/accounts/home_page" if session[:user_id].present?
 		end
 end
