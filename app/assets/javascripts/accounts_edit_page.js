@@ -24,11 +24,15 @@ function submitUpdateUserDetailsForm(e){
             /* TODO: Alert for now for faster coding */
             let { email, name } = update_user_details_form_response.result;
 
-            if(email) {
+            if(email){
                 alert(email);
             }
-            if (name) {
+            if(name){
                 alert(name);
+            }
+
+            if(update_user_details_form_response.error){
+                alert(update_user_details_form_response.error)
             }
         }
     });

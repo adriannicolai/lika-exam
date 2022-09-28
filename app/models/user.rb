@@ -136,6 +136,9 @@ class User < ApplicationRecord
             # downcase the email
             email.downcase!
 
+            # Checker for emailk pattern
+            raise "Incorrect email pattern" if (email =~ URI::MailTo::EMAIL_REGEXP).nil?
+
             # Update the user if there are no duplcate email from the db
             if duplicate_email[:error] === "User not found" || email === duplicate_email[:result]["email"]
                 update_user_details = self.update_user_record({
