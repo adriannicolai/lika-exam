@@ -1,18 +1,38 @@
 include UsersHelper
 class AccountsController < ApplicationController
-	def home_page
+	before_action :check_user_session, except: [:register_page, :register, :login_page]
 
+
+	# DOCU: This is the home page
+    # Triggered by: (GET) /accounts/home_page
+	# Session - first_name, last_name, email
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
+	def home_page
 	end
 
+	# DOCU: This is the register page
+    # Triggered by: (GET) /accounts/register_page
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
 	def register_page
 	end
 
+	# DOCU: This is the edit page
+    # Triggered by: (GET) /accounts/edit_page
+	# Session - user_id
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
 	def edit_page
 		@user = User.get_user_record({ :fields_to_filter => { :id => session[:user_id] }})
-
-		# redirect_to
 	end
 
+	# DOCU: This is the method for updating user details
+    # Triggered by: (POST) /accounts/update_account
+	# Session - user_id
+	# Params - first_name, last_name, email, update_type
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
 	def update_user_details
 		response_data = { :status => false, :result => {}, :error => nil }
 
@@ -20,8 +40,6 @@ class AccountsController < ApplicationController
 			update_user_details = User.update_user(params.merge!({"user_id" => session[:user_id] }))
 
 			response_data.merge!(update_user_details)
-
-			p response_data[:result]
 
 			# Set the new user session if the creation of new user is successful
 			set_user_session(response_data[:result].symbolize_keys!) if response_data[:status]
@@ -32,6 +50,11 @@ class AccountsController < ApplicationController
 		render :json => response_data
 	end
 
+	# DOCU: This is the method for creating a new user
+    # Triggered by: (POST) /accounts/register
+	# Params - first_name, last_name, email, update_type
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
 	def register
 		response_data = { :status => false, :result => {}, :error => nil }
 
@@ -53,6 +76,24 @@ class AccountsController < ApplicationController
 	def login_page
 	end
 
-	def update_account
+	# DOCU: Redirects the user to the sign up page and clears the session
+	# Triggered by before_action
+	# Session: session - user_id
+	# Last udpated at: September 28, 2022
+	# Owner:  Adrian
+	def logout
+		reset_session
+
+		redirect_to "/"
 	end
+
+	private
+		# DOCU: Redirects the user to the home page if there is no session
+		# Triggered by before_action
+		# Session: session - user_id
+		# Last udpated at: September 28, 2022
+		# Owner:  Adrian
+		def check_user_session
+			redirect_to "/" if !session[:user_id].present?
+		end
 end
