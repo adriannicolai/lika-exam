@@ -90,7 +90,12 @@ class AccountsController < ApplicationController
 		response_data = { :status => false, :error => {}, :error => nil }
 
 		begin
+			login_user = User.login_user(params)
 
+			response_data.merge!(login_user)
+
+			# Set the new user session if the creation of new user is successful
+			set_user_session(response_data[:result].symbolize_keys!) if response_data[:status]
 		rescue Exception => ex
 			response_data[:error] = ex.message
 		end

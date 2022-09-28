@@ -74,7 +74,39 @@ class User < ApplicationRecord
         return response_data
     end
 
-     # DOCU: Method to update user record dynamically
+     # DOCU: Method to login user
+    # Triggered by: AccountsController
+	# Requires: params - email, password
+    # Returns: { status: true/false, result, error }
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
+    def self.login_user(params)
+        response_data = { :status => false, :result => {}, :error => nil }
+
+        begin
+            # Check fields for login user
+            check_login_user_parameters = check_fields(["email", "password"], [], params)
+
+            # Guard clause for check_login_user_parameters
+            raise check_login_user_parameters[:error] if !check_login_user_parameters[:status]
+
+            # Destructure check_login_user_parameters
+            email, password = check_login_user_parameters[:result].values_at(:email, :password)
+
+            # Get user_data
+            user_details = self.get_user_record({
+                :fields_to_filter => { :email => email, :password => encrypt_password(password)},
+                :fields_to_select => "id, first_name, last_name, email"
+            })
+
+            response_data.merge!(user_details)
+        rescue Exception => ex
+            response_data[:error] = ex.message
+        end
+
+        return response_data
+    end
+    # DOCU: Method to route the update user details
     # Triggered by: AccountsController
 	# Requires: params - first_name, last_name, email, password, confirm_password
     # Returns: { status: true/false, result: { user_details }, error }
