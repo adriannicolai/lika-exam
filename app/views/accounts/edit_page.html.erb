@@ -1,0 +1,26 @@
+<h1>edit user details</h1>
+
+<form action="accounts/register" method="POST" id="update_user_details_form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <p>First Name</p>
+    <input type="text" name="first_name" />
+    <p>Last Name</p>
+    <input type="text" name="last_name" />
+    <p>Email</p>
+    <input type="text" name="email" />
+    <input type="submit" value="Submit" id="update_user_details_button" />
+</form>
+
+<h1>edit password</h1>
+<form action="accounts/register" method="POST" id="update_password_form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <p>old password</p>
+    <input type="password" name="old_password" />
+    <p>Password</p>
+    <input type="password" name="password" />
+    <p>Confirm Password</p>
+    <input type="password" name="confirm_password" />
+    <input type="submit" value="Submit" id="update_password_button" />
+</form>
+
+<a href="/accounts/home_page">Go back</a>
