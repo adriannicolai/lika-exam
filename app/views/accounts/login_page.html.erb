@@ -1,0 +1,12 @@
+<h1>Login page</h1>
+
+<form action="/accounts/login" method="POST" id="login_user_form">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <p>Email</p>
+    <input type="text" name="email" />
+    <p>Password</p>
+    <input type="password" name="password" />
+    <input type="submit" value="Submit" id="login_user_button" />
+</form>
+
+<a href="/accounts/register_page">Already have an account? Sign in here</a>

@@ -1,6 +1,6 @@
 <h1>Register page</h1>
 
-<form action="accounts/register" method="POST" id="register_user_form">
+<form action="/accounts/register" method="POST" id="register_user_form">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
     <p>First Name</p>
     <input type="text" name="first_name" />
@@ -14,3 +14,5 @@
     <input type="password" name="confirm_password" />
     <input type="submit" value="Submit" id="register_user_button" />
 </form>
+
+<a href="/accounts/login_page">Don't have an account? Sign up here</a>
