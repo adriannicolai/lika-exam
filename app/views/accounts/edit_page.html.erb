@@ -4,11 +4,11 @@
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
     <input type="hidden" name="update_type" value="<%= USER_UPDATE_TYPES[:details] %>" />
     <p>First Name</p>
-    <input type="text" name="first_name" />
+    <input type="text" name="first_name" value="<%= @user[:result]["first_name"] %>" />
     <p>Last Name</p>
-    <input type="text" name="last_name" />
+    <input type="text" name="last_name" value="<%= @user[:result]["last_name"] %>" />
     <p>Email</p>
-    <input type="text" name="email" />
+    <input type="text" name="email" value="<%= @user[:result]["email"] %>" />
     <input type="submit" value="Submit" id="update_user_details_button" />
 </form>
 
