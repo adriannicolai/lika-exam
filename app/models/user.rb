@@ -64,6 +64,11 @@ class User < ApplicationRecord
             when USER_UPDATE_TYPES[:details]
                 response_data.merge!(self.update_user_details(params))
             when USER_UPDATE_TYPES[:password]
+                # TODO: Add user updating of password scenarios are
+                # incorrect password
+                # incorrect password pattern
+                # same old password and new password
+                # passwords do not match
             else
                 response_data.merge!({ :error => "Invalid Action" })
             end
