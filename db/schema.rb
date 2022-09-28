@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_082144) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_083933) do
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email", limit: 300
+    t.string "password"
     t.integer "is_admin", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
