@@ -16,7 +16,7 @@ development:
   pooling: 5
   port: 3306
   database: accounts
-  host: 127.0.0.1 #host.docker.internal for dockerization
+  host: host.docker.internal #for dockerization
   username: root
   password: password
 
