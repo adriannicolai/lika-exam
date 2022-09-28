@@ -1,6 +1,6 @@
 include UsersHelper
 class AccountsController < ApplicationController
-	before_action :check_user_session, except: [:register_page, :register, :login_page]
+	before_action :check_user_session, except: [:register_page, :register, :login_page, :login]
 
 
 	# DOCU: This is the home page
@@ -73,7 +73,29 @@ class AccountsController < ApplicationController
 		render :json => response_data
 	end
 
+	# DOCU: This is the method rendering the login page
+    # Triggered by: (GET) /accounts/login_page
+	# Params - email, password
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
 	def login_page
+	end
+
+	# DOCU: This is the processing the login of user
+    # Triggered by: (POST) /accounts/login_page
+	# Params - email, password
+    # Last updated at: September 28, 2022
+    # Owner: Adrian
+	def login
+		response_data = { :status => false, :error => {}, :error => nil }
+
+		begin
+
+		rescue Exception => ex
+			response_data[:error] = ex.message
+		end
+
+		render :json => response_data
 	end
 
 	# DOCU: Redirects the user to the sign up page and clears the session

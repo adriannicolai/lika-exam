@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 		post "register"       => "accounts#register"
 		post "update_account" => "accounts#update_user_details"
+		post "login"          => "accounts#login"
 	end
 
 	get "logout" => "accounts#logout"
